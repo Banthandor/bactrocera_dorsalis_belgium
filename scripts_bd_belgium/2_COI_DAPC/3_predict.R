@@ -24,6 +24,7 @@
 
 
 # --------- Load required libraries ---------
+library(tidyr)
 library(ape)
 library(adegenet)
 library(ips) # required only if doing the alignment with the mafft() function in R
@@ -127,9 +128,7 @@ ggplot(cluster_proportions_normalized, aes(x = Cluster, y = PropNormalized, fill
   geom_text(data = label_positions, aes(x = Cluster, y = y, label = Label), inherit.aes = FALSE, size = 3, angle = 0, hjust = 0.5) +
   theme_minimal() +
   labs(x = "Cluster", y = "Normalized proportion") +
-  scale_x_discrete(labels = custom_cluster_labels) +
   scale_y_continuous(breaks = seq(0, 1, by = 0.1), limits = c(0, 1.35)) +
-  scale_fill_manual(values = continent_colors) +
   theme_classic() +
   theme(axis.line.y.right = element_blank(), axis.line.y.left = element_blank(), axis.ticks.x.bottom = element_blank() , axis.line.x.bottom = element_blank())
 
@@ -195,4 +194,5 @@ ggplot(cluster_proportions_normalized, aes(x = Cluster, y = PropNormalized, fill
 # French Polynesia                 | Pacific
 # United States (Hawaii/California)| Pacific
 # Reunion                          | Mascarenes
+
 # Mauritius                        | Mascarenes
