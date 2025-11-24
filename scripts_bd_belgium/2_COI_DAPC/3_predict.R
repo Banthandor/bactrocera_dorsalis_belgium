@@ -24,6 +24,7 @@
 
 
 # --------- Load required libraries ---------
+library(dplyr)
 library(tidyr)
 library(ape)
 library(adegenet)
@@ -196,3 +197,4 @@ ggplot(cluster_proportions_normalized, aes(x = Cluster, y = PropNormalized, fill
 # Reunion                          | Mascarenes
 
 # Mauritius                        | Mascarenes
+
