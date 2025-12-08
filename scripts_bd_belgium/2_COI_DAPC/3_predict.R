@@ -29,6 +29,8 @@ library(tidyr)
 library(ape)
 library(adegenet)
 library(ips) # required only if doing the alignment with the mafft() function in R
+library(tibble)
+library(ggplot2) 
 
 
 setwd("path/to/working/directory")
@@ -94,11 +96,9 @@ cluster_proportions_normalized_wide <-cluster_proportions_normalized %>%
 
 # join query assignments with cluster_proportions_normalized_wide
 posteriors <- posteriors %>%
-  left_join(cluster_proportions_normalized_wide, by = "Cluster") 
-
-# add query sample ids as rownames
-rownames(posteriors) <- new_sample_ids %>%
-  na.omit()
+  tibble::rownames_to_column("SampleID") %>%
+  left_join(cluster_proportions_normalized_wide, by = "Cluster") %>%
+  tibble::column_to_rownames("SampleID")
 
 # reorder columns for clarity
 posteriors <- posteriors[, c(c("Query_id", "Cluster"),
@@ -197,4 +197,5 @@ ggplot(cluster_proportions_normalized, aes(x = Cluster, y = PropNormalized, fill
 # Reunion                          | Mascarenes
 
 # Mauritius                        | Mascarenes
+
 
